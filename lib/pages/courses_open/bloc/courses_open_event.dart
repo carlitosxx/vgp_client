@@ -5,7 +5,7 @@ abstract class CoursesOpenEvent extends Equatable {
 }
 
 class LoadCoursesOpenEvent extends CoursesOpenEvent {
-   final String categoryId;
+  final String categoryId;
   const LoadCoursesOpenEvent(this.categoryId);
   @override
   List<Object?> get props => [categoryId];
