@@ -225,41 +225,6 @@ formCreditCardPay(
               )
             ],
           ),
-          // const Padding(
-          //   padding: EdgeInsets.only(bottom: 10, top: 10),
-          //   child: Text(
-          //     'Nombre y Apellido',
-          //     style: TextStyle(fontSize: kH2Size, color: kH2Color),
-          //   ),
-          // ),
-          // Container(
-          //   width: double.infinity,
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(10),
-          //     color: Colors.white.withOpacity(.2),
-          //   ),
-          //   child: TextField(
-          //     onTap: () {
-          //       animationController.reverse();
-          //     },
-          //     onChanged: (String value) {
-          //       cardStream.updateName(value);
-          //     },
-          //     inputFormatters: [
-          //       LengthLimitingTextInputFormatter(20),
-          //     ],
-          //     controller: controllerName,
-          //     maxLength: 20,
-          //     keyboardType: TextInputType.name,
-          //     textAlign: TextAlign.center,
-          //     style: const TextStyle(color: kH3Color, fontSize: kH3Size),
-          //     decoration: InputDecoration(
-          //         counterText: '',
-          //         border: InputBorder.none,
-          //         hintText: 'Nombre y Apellido',
-          //         hintStyle: TextStyle(color: Colors.white.withOpacity(0.3))),
-          //   ),
-          // ),
           const Padding(
             padding: EdgeInsets.only(bottom: 10, top: 10),
             child: Text(
@@ -274,9 +239,6 @@ formCreditCardPay(
               color: Colors.white.withOpacity(.2),
             ),
             child: TextField(
-              // onChanged: (String value) {
-              //   cardStream.updateName(value);
-              // },
               inputFormatters: [
                 LengthLimitingTextInputFormatter(50),
               ],
@@ -327,12 +289,6 @@ formCreditCardPay(
                       email: controllerEmail.text,
                       courseOpenId: courseOpen.id,
                       price: courseOpen.price.toString());
-                  // createCharge();
-
-                  // getStudentByEmailAndPassword(
-                  //   context: context,
-                  //   email: emailController.text,
-                  //   password: passwordController.text,);
                 }),
           ),
         ],

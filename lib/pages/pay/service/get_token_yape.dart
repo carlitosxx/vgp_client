@@ -1,25 +1,20 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:vgp_cliente/pages/pay/service/create_charge.dart';
+import 'package:vgp_cliente/utils/fix_price_culqi.dart';
 import 'package:vgp_cliente/utils/show_dialog.dart';
-import 'dart:convert';
 
-void getTokenCreditCard(
+void getTokenYape(
     {required BuildContext context,
-    required String numberCard,
-    required String expiryDate,
-    required String cvv,
-    required String email,
+    required String price,
+    required String phone,
+    required String codeOTP,
     required String courseOpenId,
-    required String price}) async {
+    required String email}) async {
   NavigatorState navigator = Navigator.of(context);
   try {
-    List<String> expiryDateList = expiryDate.split('/');
-    if (numberCard.isEmpty ||
-        expiryDate.isEmpty ||
-        cvv.isEmpty ||
-        email.isEmpty ||
-        expiryDateList.length != 2) {
+    if (phone.isEmpty || codeOTP.isEmpty || price.isEmpty || email.isEmpty) {
       navigator.pop();
       showDialogAlert(
           context: context,
@@ -27,16 +22,13 @@ void getTokenCreditCard(
           seconds: 3);
       return;
     }
-    String month = expiryDate.split('/')[0];
-    String year = expiryDate.split('/')[1];
-    numberCard = numberCard.replaceAll(" ", "");
-    String url = "https://secure.culqi.com/v2/tokens";
+    final newPrice = fixPrice(price);
+    String url = "https://secure.culqi.com/v2/tokens/yape";
     Map<String, dynamic> body = {
-      "card_number": numberCard,
-      "cvv": cvv,
-      "expiration_month": month,
-      "expiration_year": "20$year",
-      "email": email,
+      "otp": codeOTP,
+      "number_phone": phone,
+      "amount": newPrice,
+      "email": email
     };
     Response<dynamic> response = await Dio().post(url,
         data: body,

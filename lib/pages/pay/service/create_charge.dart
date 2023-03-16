@@ -37,21 +37,24 @@ void createCharge({
     if (e.type == DioErrorType.response) {
       switch (e.response!.statusCode) {
         case 400:
+          print(e.message);
           navigator.pop(context);
           Map<String, dynamic> messageError =
               json.decode(e.response.toString());
-          print(messageError);
           showDialogAlert(
               context: context, message: messageError["message"], seconds: 5);
           break;
         case 401:
           navigator.pop(context);
-          print(e.response);
-
+          Map<String, dynamic> messageError =
+              json.decode(e.response.toString());
+          showDialogAlert(
+              context: context, message: messageError["message"], seconds: 5);
           break;
         case 500:
-          navigator.pop(context);
-          print(e.response);
+          showDialogAlert(
+              context: context, message: 'Error de servidor', seconds: 5);
+
           break;
       }
     }

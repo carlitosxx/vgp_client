@@ -122,53 +122,75 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const LessonListView();
-                          currentTab = 0;
-                        });
-                      },
-                      child: SvgPicture.asset(
-                        homeIcon,
-                        width: 50,
+                    Expanded(
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const LessonListView();
+                            currentTab = 0;
+                          });
+                        },
+                        child: SvgPicture.asset(
+                          homeIcon,
+                          // width: 50,
+                        ),
                       ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const FlashCardsView();
-                          currentTab = 1;
-                        });
-                      },
-                      child: SvgPicture.asset(flascardsIcon, width: 45),
+                    Expanded(
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const FlashCardsView();
+                            currentTab = 1;
+                          });
+                        },
+                        child: SvgPicture.asset(
+                          flascardsIcon,
+                          // width: 45
+                        ),
+                      ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const RankingView();
-                          currentTab = 1;
-                        });
-                      },
-                      child: SvgPicture.asset(ranking, width: 50),
+                    Expanded(
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const RankingView();
+                            currentTab = 1;
+                          });
+                        },
+                        child: SvgPicture.asset(
+                          ranking,
+                          //  width: 50
+                        ),
+                      ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const ExamenView();
-                          currentTab = 1;
-                        });
-                      },
-                      child: SvgPicture.asset(examen, width: 40),
+                    Expanded(
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const ExamenView();
+                            currentTab = 1;
+                          });
+                        },
+                        child: SvgPicture.asset(
+                          examen,
+                          //  width: 40
+                        ),
+                      ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const NotesView();
-                          currentTab = 1;
-                        });
-                      },
-                      child: SvgPicture.asset(notes, width: 50),
+                    Expanded(
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const NotesView();
+                            currentTab = 1;
+                          });
+                        },
+                        child: SvgPicture.asset(
+                          notes,
+                          //  width: 50
+                        ),
+                      ),
                     )
                   ],
                 ),
