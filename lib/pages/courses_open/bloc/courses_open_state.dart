@@ -4,21 +4,23 @@ abstract class CoursesOpenState extends Equatable {}
 
 //todo: loading state
 class CoursesOpenLoadingState extends CoursesOpenState {
-  @override  
+  @override
   List<Object?> get props => [];
 }
+
 //todo: loaded state
 class CoursesOpenLoadedState extends CoursesOpenState {
   final List<CourseOpen> listCoursesOpen;
   CoursesOpenLoadedState(this.listCoursesOpen);
 
-  @override 
+  @override
   List<Object?> get props => [listCoursesOpen];
 }
+
 //todo: error state
 class CoursesOpenErrorState extends CoursesOpenState {
   final String error;
   CoursesOpenErrorState(this.error);
-  @override  
-  List<Object?> get props => [];
+  @override
+  List<Object?> get props => [error];
 }
