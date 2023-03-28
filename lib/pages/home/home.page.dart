@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vgp_cliente/app/presentation/pages/course/bloc/course_bloc.dart';
 import 'package:vgp_cliente/pages/home/views/exam.view.dart';
 import 'package:vgp_cliente/pages/home/views/flashcards.view.dart';
 import 'package:vgp_cliente/pages/home/views/lesson_list.view.dart';
@@ -55,12 +57,20 @@ class _HomePageState extends State<HomePage> {
                         width: 50,
                       ),
                     ),
-                    const Center(
-                      child: Text(
-                        "Carlos Aguirre",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
+                    // BlocBuilder<CourseBloc, CourseState>(
+                    //   builder: (context, state) {
+                    //     // if (state is CourseLoadingState) {
+                    //     //   return const CircularProgressIndicator();
+                    //     // } else
+                    //     if (state is CourseLoadedState) {
+                    //       return Text(state.course.name);
+                    //     } else if (state is CourseErrorState) {
+                    //       return Text(state.error);
+                    //     }
+
+                    //     return Container();
+                    //   },
+                    // ),
                     Divider(
                       color: Theme.of(context).colorScheme.primary,
                     ),

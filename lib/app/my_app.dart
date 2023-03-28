@@ -13,6 +13,7 @@ import 'package:vgp_cliente/pages/login/bloc/login_bloc.dart';
 import 'package:vgp_cliente/pages/pay/bloc/pay_bloc.dart';
 import 'package:vgp_cliente/routes/route_generator.dart';
 
+import '../injection_container.dart';
 import 'presentation/pages/course/bloc/course_bloc.dart';
 import 'package:dio/dio.dart';
 
@@ -33,8 +34,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<CoursesOpenBloc>(
             create: (_) => CoursesOpenBloc(CoursesOpenRepository())),
         BlocProvider<PayBloc>(create: (_) => PayBloc()),
-        // BlocProvider<CourseBloc>(
-        //     create: (_) => CourseBloc(CourseRepositoryImpl(CourseApi(Dio()))))
       ],
       child: MaterialApp(
         useInheritedMediaQuery: true,

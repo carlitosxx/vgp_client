@@ -28,10 +28,6 @@ class _RankingViewState extends State<RankingView> {
 
           return Container();
         },
-
-        // child: Scaffold(
-        //   body: Center(child:Text('RANKING')),
-        // ),
       ),
     );
   }
