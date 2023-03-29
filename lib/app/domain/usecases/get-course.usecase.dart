@@ -1,4 +1,4 @@
-import 'package:vgp_cliente/app/domain/repositories/course_repository.dart';
+import 'package:vgp_cliente/app/domain/repositories/course.repository.dart';
 
 class GetCourseUC {
   GetCourseUC(this.courseRepository);

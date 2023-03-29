@@ -1,5 +1,5 @@
 import 'package:vgp_cliente/app/data/datasource/remote/course.datasource.dart';
-import 'package:vgp_cliente/app/domain/repositories/course_repository.dart';
+import 'package:vgp_cliente/app/domain/repositories/course.repository.dart';
 
 class CourseRepositoryImpl implements CourseRepository {
   final CourseDataSource _courseDataSource;

@@ -1,4 +1,4 @@
-import 'package:vgp_cliente/app/domain/entities/lesson.entity.dart';
+import 'package:vgp_cliente/app/domain/entities/course/lesson.entity.dart';
 
 import 'progress-lesson.model.dart';
 

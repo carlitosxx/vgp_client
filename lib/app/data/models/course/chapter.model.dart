@@ -1,4 +1,4 @@
-import 'package:vgp_cliente/app/domain/entities/chapter.entity.dart';
+import 'package:vgp_cliente/app/domain/entities/course/chapter.entity.dart';
 
 import 'lesson.model.dart';
 

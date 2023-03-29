@@ -1,28 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:vgp_cliente/app/core/either/either.dart';
 import 'package:vgp_cliente/app/core/errors/http_request_failure.dart';
-import 'package:vgp_cliente/app/data/models/course/course.model.dart';
+import 'package:vgp_cliente/app/data/models/user_experience/user-experience.model.dart';
+import 'package:vgp_cliente/app/domain/repositories/user-experience.repository.dart';
 import 'package:vgp_cliente/environment/environment.dart';
 import 'package:vgp_cliente/utils/dio_token_interceptor.dart';
 
-import '../../../domain/repositories/course.repository.dart';
-
-abstract class CourseDataSource {
-  GetCourseFuture getCourse(String courseId);
+abstract class UserExperienceDataSource {
+  GetUserAndExperienceFuture getUserAndExperience();
 }
 
-class CourseDataSourceImpl implements CourseDataSource {
+class UserExperienceDataSourceImpl implements UserExperienceDataSource {
   final Dio dio;
-  CourseDataSourceImpl(this.dio);
+  UserExperienceDataSourceImpl(this.dio);
 
   @override
-  GetCourseFuture getCourse(String courseId) async {
+  GetUserAndExperienceFuture getUserAndExperience() async {
     try {
-      String url = "${Environment.apiUrl}course/$courseId";
+      String url =
+          "${Environment.apiUrl}user/get-user-and-experience-by-userid";
       dio.interceptors.add(DioTokenInterceptor());
-      final response = await dio.get(url);
-      if (response.statusCode == 200) {
-        final course = CourseModel.fromJson(response.data);
+      final response = await dio.post(url);
+      if (response.statusCode == 201) {
+        final course = UserExperienceModel.fromJson(response.data);
         return Either.right(
           course,
         );

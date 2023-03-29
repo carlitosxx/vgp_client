@@ -1,4 +1,4 @@
-import 'package:vgp_cliente/app/domain/entities/progress-lesson.entity.dart';
+import 'package:vgp_cliente/app/domain/entities/course/progress-lesson.entity.dart';
 
 class ProgressLessonModel extends ProgressLesson {
   ProgressLessonModel({

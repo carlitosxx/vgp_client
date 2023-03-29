@@ -4,9 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:vgp_cliente/app/domain/entities/course.entity.dart';
-
-import 'chapter.model.dart';
+import 'package:vgp_cliente/app/data/models/course/chapter.model.dart';
+import 'package:vgp_cliente/app/domain/entities/course/course.entity.dart';
 
 CourseModel courseModelFromJson(String str) =>
     CourseModel.fromJson(json.decode(str));

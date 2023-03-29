@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vgp_cliente/app/core/utils/set-level-by-experience.util.dart';
 import 'package:vgp_cliente/app/presentation/pages/course/bloc/course_bloc.dart';
+import 'package:vgp_cliente/app/presentation/pages/home/blocs/user_experience/user_experience.bloc.dart';
 import 'package:vgp_cliente/pages/home/views/exam.view.dart';
 import 'package:vgp_cliente/pages/home/views/flashcards.view.dart';
 import 'package:vgp_cliente/pages/home/views/lesson_list.view.dart';
@@ -47,72 +49,63 @@ class _HomePageState extends State<HomePage> {
             drawer: Drawer(
               child: Container(
                 color: Theme.of(context).colorScheme.background,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: SvgPicture.asset(
-                        level1,
-                        height: 50,
-                        width: 50,
-                      ),
-                    ),
-                    // BlocBuilder<CourseBloc, CourseState>(
-                    //   builder: (context, state) {
-                    //     // if (state is CourseLoadingState) {
-                    //     //   return const CircularProgressIndicator();
-                    //     // } else
-                    //     if (state is CourseLoadedState) {
-                    //       return Text(state.course.name);
-                    //     } else if (state is CourseErrorState) {
-                    //       return Text(state.error);
-                    //     }
-
-                    //     return Container();
-                    //   },
-                    // ),
-                    Divider(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.credit_score,
-                      ),
-                      title: const Text('Pruebas'),
-                      onTap: () async {
-                        /**
-                        * todo: PRUEBAS
-                        */
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.credit_score,
-                      ),
-                      title: const Text('Comprar cursos'),
-                      onTap: () async {
-                        /**
-                        * todo: CoursesOpen
-                        */
-                        Navigator.of(context).pushNamed("/category");
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.logout),
-                      title: const Text('Cerrar sesión'),
-                      onTap: () async {
-                        /**
-                        * todo: LIMPIAR SHARED PREFERENCE Y REDIRIGIR A LOGIN
-                        */
-                        const storage = FlutterSecureStorage();
-                        await storage.deleteAll();
-                        await storage.delete(key: 'token');
-                        if (context.mounted) {
-                          Navigator.of(context).pushReplacementNamed("/login");
-                        }
-                      },
-                    ),
-                  ],
+                child: BlocBuilder<UserExperienceBloc, UserExperienceState>(
+                  builder: (context, state) {
+                    if (state is UserExperienceLoadedState) {
+                      return Column(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: setLevelByExperience(
+                                  state.userExperience.experience)
+                              // SvgPicture.asset(
+                              //   level1,
+                              //   height: 50,
+                              //   width: 50,
+                              // ),
+                              ),
+                          // (state.userExperience.experience>0)?Text('${state.userExperience.experience} '),
+                          Text(
+                              '${state.userExperience.firstName} ${state.userExperience.lastName}'),
+                          Divider(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.credit_score,
+                            ),
+                            title: const Text('Pruebas'),
+                            onTap: () async {},
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.credit_score,
+                            ),
+                            title: const Text('Comprar cursos'),
+                            onTap: () async {
+                              Navigator.of(context).pushNamed("/category");
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.logout),
+                            title: const Text('Cerrar sesión'),
+                            onTap: () async {
+                              const storage = FlutterSecureStorage();
+                              await storage.deleteAll();
+                              await storage.delete(key: 'token');
+                              if (context.mounted) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed("/login");
+                              }
+                            },
+                          ),
+                        ],
+                      );
+                    } else if (state is UserExperienceErrorState) {
+                      return Text(state.error);
+                    }
+                    return Container();
+                  },
                 ),
               ),
             ),

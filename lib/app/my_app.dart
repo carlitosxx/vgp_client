@@ -2,9 +2,6 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vgp_cliente/app/data/repositories_impl/course_repository_impl.dart';
-import 'package:vgp_cliente/app/data/datasource/remote/course.datasource.dart';
-import 'package:vgp_cliente/app/domain/repositories/course_repository.dart';
 import 'package:vgp_cliente/pages/category/bloc/category/category_bloc.dart';
 import 'package:vgp_cliente/pages/category/repositories/category.repository.dart';
 import 'package:vgp_cliente/pages/courses_open/bloc/courses_open_bloc.dart';
@@ -12,10 +9,6 @@ import 'package:vgp_cliente/pages/courses_open/repositories/courses_open.reposit
 import 'package:vgp_cliente/pages/login/bloc/login_bloc.dart';
 import 'package:vgp_cliente/pages/pay/bloc/pay_bloc.dart';
 import 'package:vgp_cliente/routes/route_generator.dart';
-
-import '../injection_container.dart';
-import 'presentation/pages/course/bloc/course_bloc.dart';
-import 'package:dio/dio.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
