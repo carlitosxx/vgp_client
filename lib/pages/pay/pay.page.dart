@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:vgp_cliente/constants/colors.dart';
-import 'package:vgp_cliente/constants/typography.dart';
+import 'package:vgp_cliente/app/core/constants/colors.dart';
+import 'package:vgp_cliente/app/core/constants/typography.dart';
 import 'package:vgp_cliente/pages/courses_open/models/course_open.model.dart';
 import 'package:vgp_cliente/pages/pay/views/deposit_transfer.view.dart';
 import 'package:vgp_cliente/pages/pay/views/pay_credit_card.view.dart';

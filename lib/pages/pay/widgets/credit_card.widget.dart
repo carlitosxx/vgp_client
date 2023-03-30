@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:vgp_cliente/constants/breakpoints.dart';
-import 'package:vgp_cliente/constants/typography.dart';
+import 'package:vgp_cliente/app/core/constants/breakpoints.dart';
+import 'package:vgp_cliente/app/core/constants/typography.dart';
 import 'package:vgp_cliente/pages/pay/stream/card_stream.dart';
 
 class CreditCardWidget extends StatelessWidget {

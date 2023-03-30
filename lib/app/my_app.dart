@@ -6,9 +6,9 @@ import 'package:vgp_cliente/pages/category/bloc/category/category_bloc.dart';
 import 'package:vgp_cliente/pages/category/repositories/category.repository.dart';
 import 'package:vgp_cliente/pages/courses_open/bloc/courses_open_bloc.dart';
 import 'package:vgp_cliente/pages/courses_open/repositories/courses_open.repository.dart';
-import 'package:vgp_cliente/pages/login/bloc/login_bloc.dart';
 import 'package:vgp_cliente/pages/pay/bloc/pay_bloc.dart';
-import 'package:vgp_cliente/routes/route_generator.dart';
+import 'package:vgp_cliente/app/presentation/routes/route_generator.dart'
+    as routes;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => LoginBloc()),
         BlocProvider<CategoryBloc>(
             create: (_) => CategoryBloc(CategoryRepository())),
         BlocProvider<CoursesOpenBloc>(
@@ -59,7 +58,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         initialRoute: '/splash',
-        onGenerateRoute: RouteGenerator.generateRoute,
+        onGenerateRoute: routes.RouteGenerator.generateRoute,
       ),
     );
   }

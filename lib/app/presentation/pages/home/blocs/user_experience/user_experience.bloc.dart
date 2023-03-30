@@ -14,12 +14,12 @@ class UserExperienceBloc
   UserExperienceBloc(this._getUserAndExperienceUC)
       : super(UserExperienceLoadingState()) {
     on<LoadUserExperienceEvent>((event, emit) async {
-      emit(UserExperienceLoadingState());
+      print('pase por el evento load de userexperience ');
       final userExperience = await _getUserAndExperienceUC();
       userExperience.when(
           left: (failure) =>
               emit(UserExperienceErrorState(mapFailureToString(failure))),
-          right: (course) => emit(UserExperienceLoadedState(course)));
+          right: (course) => {emit(UserExperienceLoadedState(course))});
     });
   }
 }

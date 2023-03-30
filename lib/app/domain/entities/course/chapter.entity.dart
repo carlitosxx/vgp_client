@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'lesson.entity.dart';
 
 class Chapter extends Equatable {
-  Chapter({
+  const Chapter({
     required this.id,
     required this.name,
     this.description,

@@ -12,7 +12,7 @@ lib
             └── nombre_de_la_entidad.entity.dart
 ```
 
-#### Importamos la biblioteca **Equatable**, creamos la clase y los extendemos, agregamos el constructor con las propiedades de la clase, verificar si la propiedad es **requerida** o **opcional** por ultimo sobreescribimos la lista de las propiedades de la siguiente forma:
+- #### Importamos la biblioteca **Equatable**, creamos la clase y los extendemos, agregamos el constructor con las propiedades de la clase, verificar si la propiedad es **requerida** o **opcional** por ultimo sobreescribimos la lista de las propiedades de la siguiente forma:
 
 ```dart
 import 'package:equatable/equatable.dart';

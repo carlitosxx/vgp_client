@@ -2,10 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:vgp_cliente/app/core/either/either.dart';
 import 'package:vgp_cliente/app/core/errors/http_request_failure.dart';
 import 'package:vgp_cliente/app/data/models/course/course.model.dart';
-import 'package:vgp_cliente/environment/environment.dart';
-import 'package:vgp_cliente/utils/dio_token_interceptor.dart';
-
-import '../../../domain/repositories/course.repository.dart';
+import 'package:vgp_cliente/app/core/constants/environment.dart';
+import 'package:vgp_cliente/app/domain/repositories/course.repository.dart';
+import 'package:vgp_cliente/app/core/utils/dio_token_interceptor.dart';
 
 abstract class CourseDataSource {
   GetCourseFuture getCourse(String courseId);

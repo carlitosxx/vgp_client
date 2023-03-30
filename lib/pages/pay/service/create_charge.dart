@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:vgp_cliente/environment/environment.dart';
-import 'package:vgp_cliente/utils/dio_token_interceptor.dart';
+import 'package:vgp_cliente/app/core/constants/environment.dart';
+import 'package:vgp_cliente/app/core/utils/dio_token_interceptor.dart';
 import 'package:flutter/material.dart';
-import 'package:vgp_cliente/utils/show_dialog.dart';
+import 'package:vgp_cliente/app/core/utils/show_dialog.dart';
 
 void createCharge({
   required String email,

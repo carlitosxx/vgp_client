@@ -5,7 +5,7 @@ import 'package:vgp_cliente/pages/courses_open/models/course_open.model.dart';
 import 'package:vgp_cliente/pages/courses_open/repositories/courses_open.repository.dart';
 import 'package:vgp_cliente/pages/courses_open/widgets/cardgrid_course_open.dart';
 import 'package:vgp_cliente/pages/courses_open/widgets/cardlist_course_open.dart';
-import 'package:vgp_cliente/responsive/grid.responsive.dart';
+import 'package:vgp_cliente/app/presentation/responsive/grid.responsive.dart';
 
 class CoursesOpenPage extends StatelessWidget {
   final String categoryId;

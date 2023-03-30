@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:vgp_cliente/app/core/utils/fix_price_culqi.dart';
 import 'package:vgp_cliente/pages/pay/service/create_charge.dart';
-import 'package:vgp_cliente/utils/fix_price_culqi.dart';
-import 'package:vgp_cliente/utils/show_dialog.dart';
+import 'package:vgp_cliente/app/core/utils/show_dialog.dart';
 
 void getTokenYape(
     {required BuildContext context,

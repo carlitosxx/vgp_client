@@ -1,47 +1,50 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vgp_cliente/app/core/constants/environment.dart';
 import 'package:vgp_cliente/app/core/either/either.dart';
 import 'package:vgp_cliente/app/core/errors/http_request_failure.dart';
-import 'package:vgp_cliente/app/data/models/user_experience/user-experience.model.dart';
-import 'package:vgp_cliente/app/domain/repositories/user-experience.repository.dart';
-import 'package:vgp_cliente/app/core/constants/environment.dart';
-import 'package:vgp_cliente/app/core/utils/dio_token_interceptor.dart';
+import 'package:vgp_cliente/app/data/models/login/login.model.dart';
+import 'package:vgp_cliente/app/domain/repositories/login.repository.dart';
 
-abstract class UserExperienceDataSource {
-  GetUserAndExperienceFuture getUserAndExperience();
+abstract class LoginDataSource {
+  GetLoginFuture getLogin(String email, String password);
 }
 
-class UserExperienceDataSourceImpl implements UserExperienceDataSource {
+class LoginDataSourceImpl implements LoginDataSource {
   final Dio dio;
-  UserExperienceDataSourceImpl(this.dio);
+  LoginDataSourceImpl(this.dio);
 
   @override
-  GetUserAndExperienceFuture getUserAndExperience() async {
+  GetLoginFuture getLogin(String email, String password) async {
     try {
-      String url =
-          "${Environment.apiUrl}user/get-user-and-experience-by-userid";
-      dio.interceptors.add(DioTokenInterceptor());
-      final response = await dio.post(url);
+      FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+      String url = "${Environment.apiUrl}auth/login";
+      Map<String, dynamic> data = {"email": email, "password": password};
+      final response = await dio.post(url, data: data);
       if (response.statusCode == 201) {
-        final course = UserExperienceModel.fromJson(response.data);
-        print("201 user experience");
+        final login = LoginModel.fromJson(response.data);
+        secureStorage.write(key: 'token', value: login.token);
+        print(login);
         return Either.right(
-          course,
+          login,
         );
       } else {
-        print('else user experience');
         return Either.left(
           HttpRequestFailure.badRequest(),
         );
       }
     } on DioError catch (e) {
-      print('DioError user experience');
+      // print(e);
       late HttpRequestFailure failure;
       if (e.type == DioErrorType.response) {
+        if (e.response!.statusCode == 400) {
+          failure = HttpRequestFailure.notFound();
+        }
         if (e.response!.statusCode == 404) {
           failure = HttpRequestFailure.notFound();
         } else if (e.response!.statusCode == 401) {
           failure = HttpRequestFailure.unauthorized();
-        } else if (e.response!.statusCode == 500) {
+        } else if (e.response!.statusCode! >= 500) {
           failure = HttpRequestFailure.server();
         }
       } else if (e.type == DioErrorType.connectTimeout ||
@@ -54,7 +57,7 @@ class UserExperienceDataSourceImpl implements UserExperienceDataSource {
         failure,
       );
     } catch (e) {
-      print(e);
+      // print(e);
       return Either.left(
         HttpRequestFailure.local(),
       );

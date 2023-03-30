@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:vgp_cliente/pages/courses_open/models/course_open.model.dart';
 
-import '/environment/environment.dart';
+import '../../../app/core/constants/environment.dart';
 
 class CoursesOpenRepository {
   Future<List<CourseOpen>> getCoursesOpenByCategoryId(

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:vgp_cliente/app/core/errors/http_request_failure.dart';
 import 'package:vgp_cliente/app/core/utils/map-failure-to-string.util.dart';
 import 'package:vgp_cliente/app/domain/entities/course/course.entity.dart';
 import 'package:vgp_cliente/app/domain/usecases/get-course.usecase.dart';
