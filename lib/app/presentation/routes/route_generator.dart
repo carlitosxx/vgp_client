@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vgp_cliente/app/presentation/pages/home/home.page.dart';
+import 'package:vgp_cliente/app/presentation/pages/register/register.page.dart';
 import 'package:vgp_cliente/pages/category/category.page.dart';
 import 'package:vgp_cliente/pages/courses_open/courses_open.page.dart';
 import 'package:vgp_cliente/pages/courses_open/models/course_open.model.dart';
@@ -14,6 +15,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashPage());
       case "/login":
         return MaterialPageRoute(builder: (_) => const LoginPage());
+      case "/register":
+        return MaterialPageRoute(builder: (_) => const RegisterPage());
       case "/home":
         return MaterialPageRoute(builder: (_) => const HomePage());
       case "/category":

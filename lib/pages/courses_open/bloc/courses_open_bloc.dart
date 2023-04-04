@@ -8,13 +8,16 @@ part 'courses_open_state.dart';
 
 class CoursesOpenBloc extends Bloc<CoursesOpenEvent, CoursesOpenState> {
   final CoursesOpenRepository _coursesOpenRepository;
-  CoursesOpenBloc(this._coursesOpenRepository) : super(CoursesOpenLoadingState()) {    
+  CoursesOpenBloc(this._coursesOpenRepository)
+      : super(CoursesOpenLoadingState()) {
     on<LoadCoursesOpenEvent>((event, emit) async {
       emit(CoursesOpenLoadingState());
       try {
-        final coursesOpen=await _coursesOpenRepository.getCoursesOpenByCategoryId(categoryId: event.categoryId);
+        final coursesOpen = await _coursesOpenRepository
+            .getCoursesOpenByCategoryId(categoryId: event.categoryId);
         emit(CoursesOpenLoadedState(coursesOpen));
       } catch (e) {
+        print(e);
         emit(CoursesOpenErrorState(e.toString()));
       }
     });

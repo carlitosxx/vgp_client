@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:vgp_cliente/app/core/either/either.dart';
 import 'package:vgp_cliente/app/core/errors/http_request_failure.dart';
+import 'package:vgp_cliente/app/core/utils/catch_dio_error.dart';
 import 'package:vgp_cliente/app/data/models/user_experience/user-experience.model.dart';
 import 'package:vgp_cliente/app/domain/repositories/user-experience.repository.dart';
 import 'package:vgp_cliente/app/core/constants/environment.dart';
@@ -23,38 +24,19 @@ class UserExperienceDataSourceImpl implements UserExperienceDataSource {
       final response = await dio.post(url);
       if (response.statusCode == 201) {
         final course = UserExperienceModel.fromJson(response.data);
-        print("201 user experience");
         return Either.right(
           course,
         );
       } else {
-        print('else user experience');
         return Either.left(
-          HttpRequestFailure.badRequest(),
+          HttpRequestFailure.notFound(),
         );
       }
     } on DioError catch (e) {
-      print('DioError user experience');
-      late HttpRequestFailure failure;
-      if (e.type == DioErrorType.response) {
-        if (e.response!.statusCode == 404) {
-          failure = HttpRequestFailure.notFound();
-        } else if (e.response!.statusCode == 401) {
-          failure = HttpRequestFailure.unauthorized();
-        } else if (e.response!.statusCode == 500) {
-          failure = HttpRequestFailure.server();
-        }
-      } else if (e.type == DioErrorType.connectTimeout ||
-          e.type == DioErrorType.receiveTimeout) {
-        failure = HttpRequestFailure.network();
-      } else {
-        failure = HttpRequestFailure.badRequest();
-      }
       return Either.left(
-        failure,
+        catchDioError(e),
       );
     } catch (e) {
-      print(e);
       return Either.left(
         HttpRequestFailure.local(),
       );

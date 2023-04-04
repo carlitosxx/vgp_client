@@ -14,6 +14,7 @@ class CoursesOpenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final kSize = MediaQuery.of(context).size;
+    print(categoryId);
     final maxWidh = kSize.width;
     print(kSize);
     return Scaffold(
@@ -54,7 +55,12 @@ class CoursesOpenPage extends StatelessWidget {
                             children: items,
                           ));
               }
-              return const SizedBox();
+              if (state is CoursesOpenErrorState) {
+                SliverToBoxAdapter(
+                  child: Text(state.error),
+                );
+              }
+              return const SliverToBoxAdapter();
             }),
           )
         ],

@@ -8,11 +8,11 @@ Widget inputWidget({
   required double marginHorizontal,
 }) {
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
     margin: EdgeInsets.fromLTRB(marginHorizontal, 15, marginHorizontal, 0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: Colors.white.withOpacity(.2),
+      color: Colors.white.withOpacity(.1),
     ),
     child: TextField(
       controller: controller,

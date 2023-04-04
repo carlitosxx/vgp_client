@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:vgp_cliente/app/core/either/either.dart';
 import 'package:vgp_cliente/app/core/errors/http_request_failure.dart';
+import 'package:vgp_cliente/app/core/utils/catch_dio_error.dart';
 import 'package:vgp_cliente/app/data/models/course/course.model.dart';
 import 'package:vgp_cliente/app/core/constants/environment.dart';
 import 'package:vgp_cliente/app/domain/repositories/course.repository.dart';
@@ -27,27 +28,12 @@ class CourseDataSourceImpl implements CourseDataSource {
         );
       } else {
         return Either.left(
-          HttpRequestFailure.badRequest(),
+          HttpRequestFailure.notFound(),
         );
       }
     } on DioError catch (e) {
-      late HttpRequestFailure failure;
-      if (e.type == DioErrorType.response) {
-        if (e.response!.statusCode == 404) {
-          failure = HttpRequestFailure.notFound();
-        } else if (e.response!.statusCode == 401) {
-          failure = HttpRequestFailure.unauthorized();
-        } else if (e.response!.statusCode == 500) {
-          failure = HttpRequestFailure.server();
-        }
-      } else if (e.type == DioErrorType.connectTimeout ||
-          e.type == DioErrorType.receiveTimeout) {
-        failure = HttpRequestFailure.network();
-      } else {
-        failure = HttpRequestFailure.badRequest();
-      }
       return Either.left(
-        failure,
+        catchDioError(e),
       );
     } catch (e) {
       return Either.left(

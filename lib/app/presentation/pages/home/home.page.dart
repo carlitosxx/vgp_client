@@ -11,7 +11,6 @@ import 'package:vgp_cliente/app/presentation/pages/home/views/notes.view.dart';
 import 'package:vgp_cliente/app/presentation/pages/home/views/ranking.view.dart';
 import 'package:vgp_cliente/app/presentation/pages/home/widgets/myappbar.dart';
 import 'package:vgp_cliente/app/presentation/pages/login/blocs/login/login_bloc.dart';
-import 'package:vgp_cliente/injection_container.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,19 +20,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final List<bool> _activated = List<bool>.filled(5, false);
   int currentTab = 0;
-  final List<Widget> screens = const [
-    LessonListView(),
-    FlashCardsView(),
-    RankingView(),
-    ExamenView(),
-    NotesView(),
-  ];
-  Widget currentScreen = const LessonListView();
-  final PageStorageBucket bucket = PageStorageBucket();
+  // final List<Widget> screens = const [
+  //   LessonListView(),
+  //   FlashCardsView(),
+  //   RankingView(),
+  //   ExamenView(),
+  //   NotesView(),
+  // ];
+  // Widget currentScreen = const LessonListView();
+  // final PageStorageBucket bucket = PageStorageBucket();
   @override
   Widget build(BuildContext context) {
-    // context.read<UserExperienceBloc>().add(const LoadUserExperienceEvent());
+    // mark this index as activated
+    _activated[currentTab] = true;
+
     const String homeIcon = 'assets/icons/home.svg';
     const String flascardsIcon = 'assets/icons/flashcards.svg';
     const String ranking = 'assets/icons/ranking.svg';
@@ -48,7 +50,21 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Theme.of(context).colorScheme.background,
             appBar: const MyAppBar(),
             drawer: const BuiltDraw(),
-            body: PageStorage(bucket: bucket, child: currentScreen),
+            body: IndexedStack(
+              index: currentTab,
+              children: [
+                _activated[0]
+                    ? const LessonListView()
+                    : const SizedBox.shrink(),
+                _activated[1]
+                    ? const FlashCardsView()
+                    : const SizedBox.shrink(),
+                _activated[2] ? const RankingView() : const SizedBox.shrink(),
+                _activated[3] ? const ExamenView() : const SizedBox.shrink(),
+                _activated[4] ? const NotesView() : const SizedBox.shrink()
+              ],
+            ),
+            // PageStorage(bucket: bucket, child: currentScreen),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
@@ -68,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                       child: MaterialButton(
                         onPressed: () {
                           setState(() {
-                            currentScreen = const LessonListView();
+                            // currentScreen = const LessonListView();
                             currentTab = 0;
                           });
                         },
@@ -82,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                       child: MaterialButton(
                         onPressed: () {
                           setState(() {
-                            currentScreen = const FlashCardsView();
+                            // currentScreen = const FlashCardsView();
                             currentTab = 1;
                           });
                         },
@@ -96,8 +112,8 @@ class _HomePageState extends State<HomePage> {
                       child: MaterialButton(
                         onPressed: () {
                           setState(() {
-                            currentScreen = const RankingView();
-                            currentTab = 1;
+                            // currentScreen = const RankingView();
+                            currentTab = 2;
                           });
                         },
                         child: SvgPicture.asset(
@@ -110,8 +126,8 @@ class _HomePageState extends State<HomePage> {
                       child: MaterialButton(
                         onPressed: () {
                           setState(() {
-                            currentScreen = const ExamenView();
-                            currentTab = 1;
+                            // currentScreen = const ExamenView();
+                            currentTab = 3;
                           });
                         },
                         child: SvgPicture.asset(
@@ -124,8 +140,8 @@ class _HomePageState extends State<HomePage> {
                       child: MaterialButton(
                         onPressed: () {
                           setState(() {
-                            currentScreen = const NotesView();
-                            currentTab = 1;
+                            // currentScreen = const NotesView();
+                            currentTab = 4;
                           });
                         },
                         child: SvgPicture.asset(
@@ -192,7 +208,9 @@ class BuiltDraw extends StatelessWidget {
                       const storage = FlutterSecureStorage();
                       await storage.deleteAll();
                       await storage.delete(key: 'token');
+
                       if (context.mounted) {
+                        context.read<LoginBloc>().add(SetLoginInitialEvent());
                         Navigator.of(context).pushReplacementNamed("/login");
                       }
                     },

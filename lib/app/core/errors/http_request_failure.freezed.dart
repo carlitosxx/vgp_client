@@ -22,7 +22,7 @@ mixin _$HttpRequestFailure {
     required TResult Function() notFound,
     required TResult Function() server,
     required TResult Function() unauthorized,
-    required TResult Function() badRequest,
+    required TResult Function(BadRequestModel dataError) badRequest,
     required TResult Function() local,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$HttpRequestFailure {
     TResult? Function()? notFound,
     TResult? Function()? server,
     TResult? Function()? unauthorized,
-    TResult? Function()? badRequest,
+    TResult? Function(BadRequestModel dataError)? badRequest,
     TResult? Function()? local,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$HttpRequestFailure {
     TResult Function()? notFound,
     TResult Function()? server,
     TResult Function()? unauthorized,
-    TResult Function()? badRequest,
+    TResult Function(BadRequestModel dataError)? badRequest,
     TResult Function()? local,
     required TResult orElse(),
   }) =>
@@ -139,7 +139,7 @@ class _$_Network implements _Network {
     required TResult Function() notFound,
     required TResult Function() server,
     required TResult Function() unauthorized,
-    required TResult Function() badRequest,
+    required TResult Function(BadRequestModel dataError) badRequest,
     required TResult Function() local,
   }) {
     return network();
@@ -152,7 +152,7 @@ class _$_Network implements _Network {
     TResult? Function()? notFound,
     TResult? Function()? server,
     TResult? Function()? unauthorized,
-    TResult? Function()? badRequest,
+    TResult? Function(BadRequestModel dataError)? badRequest,
     TResult? Function()? local,
   }) {
     return network?.call();
@@ -165,7 +165,7 @@ class _$_Network implements _Network {
     TResult Function()? notFound,
     TResult Function()? server,
     TResult Function()? unauthorized,
-    TResult Function()? badRequest,
+    TResult Function(BadRequestModel dataError)? badRequest,
     TResult Function()? local,
     required TResult orElse(),
   }) {
@@ -265,7 +265,7 @@ class _$_NotFound implements _NotFound {
     required TResult Function() notFound,
     required TResult Function() server,
     required TResult Function() unauthorized,
-    required TResult Function() badRequest,
+    required TResult Function(BadRequestModel dataError) badRequest,
     required TResult Function() local,
   }) {
     return notFound();
@@ -278,7 +278,7 @@ class _$_NotFound implements _NotFound {
     TResult? Function()? notFound,
     TResult? Function()? server,
     TResult? Function()? unauthorized,
-    TResult? Function()? badRequest,
+    TResult? Function(BadRequestModel dataError)? badRequest,
     TResult? Function()? local,
   }) {
     return notFound?.call();
@@ -291,7 +291,7 @@ class _$_NotFound implements _NotFound {
     TResult Function()? notFound,
     TResult Function()? server,
     TResult Function()? unauthorized,
-    TResult Function()? badRequest,
+    TResult Function(BadRequestModel dataError)? badRequest,
     TResult Function()? local,
     required TResult orElse(),
   }) {
@@ -389,7 +389,7 @@ class _$_Server implements _Server {
     required TResult Function() notFound,
     required TResult Function() server,
     required TResult Function() unauthorized,
-    required TResult Function() badRequest,
+    required TResult Function(BadRequestModel dataError) badRequest,
     required TResult Function() local,
   }) {
     return server();
@@ -402,7 +402,7 @@ class _$_Server implements _Server {
     TResult? Function()? notFound,
     TResult? Function()? server,
     TResult? Function()? unauthorized,
-    TResult? Function()? badRequest,
+    TResult? Function(BadRequestModel dataError)? badRequest,
     TResult? Function()? local,
   }) {
     return server?.call();
@@ -415,7 +415,7 @@ class _$_Server implements _Server {
     TResult Function()? notFound,
     TResult Function()? server,
     TResult Function()? unauthorized,
-    TResult Function()? badRequest,
+    TResult Function(BadRequestModel dataError)? badRequest,
     TResult Function()? local,
     required TResult orElse(),
   }) {
@@ -515,7 +515,7 @@ class _$_Unauthorized implements _Unauthorized {
     required TResult Function() notFound,
     required TResult Function() server,
     required TResult Function() unauthorized,
-    required TResult Function() badRequest,
+    required TResult Function(BadRequestModel dataError) badRequest,
     required TResult Function() local,
   }) {
     return unauthorized();
@@ -528,7 +528,7 @@ class _$_Unauthorized implements _Unauthorized {
     TResult? Function()? notFound,
     TResult? Function()? server,
     TResult? Function()? unauthorized,
-    TResult? Function()? badRequest,
+    TResult? Function(BadRequestModel dataError)? badRequest,
     TResult? Function()? local,
   }) {
     return unauthorized?.call();
@@ -541,7 +541,7 @@ class _$_Unauthorized implements _Unauthorized {
     TResult Function()? notFound,
     TResult Function()? server,
     TResult Function()? unauthorized,
-    TResult Function()? badRequest,
+    TResult Function(BadRequestModel dataError)? badRequest,
     TResult Function()? local,
     required TResult orElse(),
   }) {
@@ -604,6 +604,8 @@ abstract class _$$_BadRequestCopyWith<$Res> {
   factory _$$_BadRequestCopyWith(
           _$_BadRequest value, $Res Function(_$_BadRequest) then) =
       __$$_BadRequestCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BadRequestModel dataError});
 }
 
 /// @nodoc
@@ -613,26 +615,51 @@ class __$$_BadRequestCopyWithImpl<$Res>
   __$$_BadRequestCopyWithImpl(
       _$_BadRequest _value, $Res Function(_$_BadRequest) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dataError = null,
+  }) {
+    return _then(_$_BadRequest(
+      null == dataError
+          ? _value.dataError
+          : dataError // ignore: cast_nullable_to_non_nullable
+              as BadRequestModel,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_BadRequest implements _BadRequest {
-  _$_BadRequest();
+  _$_BadRequest(this.dataError);
+
+  @override
+  final BadRequestModel dataError;
 
   @override
   String toString() {
-    return 'HttpRequestFailure.badRequest()';
+    return 'HttpRequestFailure.badRequest(dataError: $dataError)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_BadRequest);
+        (other.runtimeType == runtimeType &&
+            other is _$_BadRequest &&
+            (identical(other.dataError, dataError) ||
+                other.dataError == dataError));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, dataError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BadRequestCopyWith<_$_BadRequest> get copyWith =>
+      __$$_BadRequestCopyWithImpl<_$_BadRequest>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -641,10 +668,10 @@ class _$_BadRequest implements _BadRequest {
     required TResult Function() notFound,
     required TResult Function() server,
     required TResult Function() unauthorized,
-    required TResult Function() badRequest,
+    required TResult Function(BadRequestModel dataError) badRequest,
     required TResult Function() local,
   }) {
-    return badRequest();
+    return badRequest(dataError);
   }
 
   @override
@@ -654,10 +681,10 @@ class _$_BadRequest implements _BadRequest {
     TResult? Function()? notFound,
     TResult? Function()? server,
     TResult? Function()? unauthorized,
-    TResult? Function()? badRequest,
+    TResult? Function(BadRequestModel dataError)? badRequest,
     TResult? Function()? local,
   }) {
-    return badRequest?.call();
+    return badRequest?.call(dataError);
   }
 
   @override
@@ -667,12 +694,12 @@ class _$_BadRequest implements _BadRequest {
     TResult Function()? notFound,
     TResult Function()? server,
     TResult Function()? unauthorized,
-    TResult Function()? badRequest,
+    TResult Function(BadRequestModel dataError)? badRequest,
     TResult Function()? local,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
-      return badRequest();
+      return badRequest(dataError);
     }
     return orElse();
   }
@@ -722,7 +749,12 @@ class _$_BadRequest implements _BadRequest {
 }
 
 abstract class _BadRequest implements HttpRequestFailure {
-  factory _BadRequest() = _$_BadRequest;
+  factory _BadRequest(final BadRequestModel dataError) = _$_BadRequest;
+
+  BadRequestModel get dataError;
+  @JsonKey(ignore: true)
+  _$$_BadRequestCopyWith<_$_BadRequest> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -765,7 +797,7 @@ class _$_Local implements _Local {
     required TResult Function() notFound,
     required TResult Function() server,
     required TResult Function() unauthorized,
-    required TResult Function() badRequest,
+    required TResult Function(BadRequestModel dataError) badRequest,
     required TResult Function() local,
   }) {
     return local();
@@ -778,7 +810,7 @@ class _$_Local implements _Local {
     TResult? Function()? notFound,
     TResult? Function()? server,
     TResult? Function()? unauthorized,
-    TResult? Function()? badRequest,
+    TResult? Function(BadRequestModel dataError)? badRequest,
     TResult? Function()? local,
   }) {
     return local?.call();
@@ -791,7 +823,7 @@ class _$_Local implements _Local {
     TResult Function()? notFound,
     TResult Function()? server,
     TResult Function()? unauthorized,
-    TResult Function()? badRequest,
+    TResult Function(BadRequestModel dataError)? badRequest,
     TResult Function()? local,
     required TResult orElse(),
   }) {

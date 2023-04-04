@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vgp_cliente/app/core/utils/show_dialog.dart';
 import 'package:vgp_cliente/app/presentation/pages/home/blocs/user_experience/user_experience.bloc.dart';
-
 import 'package:vgp_cliente/app/presentation/pages/login/blocs/login/login_bloc.dart';
-
 import 'package:vgp_cliente/app/presentation/pages/login/widgets/input.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     const String assetName = 'assets/others/logo2.svg';
-    final Size kSize = MediaQuery.of(context).size;
+    Size kSize = MediaQuery.of(context).size;
     double ancho = kSize.width;
     return WillPopScope(
       onWillPop: () async => false,
@@ -64,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           //TEXTO EMPECEMOS
                           Text(
-                            'IDENTIFICATE',
+                            'IDENTIFÍCATE',
                             style: TextStyle(
                               fontSize:
                                   (ancho < 412) ? ancho * 0.09 : ancho * 0.05,
@@ -74,13 +72,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           //INPUTS
                           inputWidget(
-                              hintText: 'INGRESE SU CORREO',
+                              hintText: 'CORREO ELECTRÓNICO',
                               maxLength: 100,
                               textInputType: TextInputType.emailAddress,
                               controller: emailController,
                               marginHorizontal: 0),
                           inputWidget(
-                              hintText: 'INGRESE SU CLAVE',
+                              hintText: 'CONTRASEÑA',
                               maxLength: 12,
                               textInputType: TextInputType.visiblePassword,
                               controller: passwordController,
@@ -97,6 +95,26 @@ class _LoginPageState extends State<LoginPage> {
                                     emailController: emailController,
                                     passwordController: passwordController),
                               ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("¿No tienes una cuenta?"),
+                              TextButton(
+                                  style: TextButton.styleFrom(
+                                      splashFactory: NoSplash.splashFactory),
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/register');
+                                  },
+                                  child: Text(
+                                    'Regístrate',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary),
+                                  ))
                             ],
                           ),
                         ],
@@ -187,31 +205,7 @@ class BottonLogin extends StatelessWidget {
                 ],
               ));
         }
-        //! cargado state login
-        if (state is LoginLoadedState) {
-          return ElevatedButton(
-              style: TextButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-              child: const Text(
-                'SIGUIENTE',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              onPressed: () {
-                if (emailController.text == '' ||
-                    passwordController.text == '') {
-                  showDialogAlert(
-                      context: context,
-                      message: 'esta enviando campos vacios',
-                      seconds: 3);
-                } else {
-                  context.read<LoginBloc>().add(LoadLoginEvent(
-                      emailController.text, passwordController.text));
-                }
-              });
-        }
+
         //! error state login
         if (state is LoginErrorState) {
           return ElevatedButton(

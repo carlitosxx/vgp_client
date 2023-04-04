@@ -49,11 +49,7 @@ class _MyAppBarState extends State<MyAppBar> {
                 fit: FlexFit.loose,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        // shape: BoxShape.
-                        ),
-                  ),
+                  child: Container(),
 
                   // SizedBox(
                   //   // margin: EdgeInsets.symmetric(vertical: 20),

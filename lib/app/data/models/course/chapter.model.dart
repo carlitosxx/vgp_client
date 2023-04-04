@@ -3,7 +3,7 @@ import 'package:vgp_cliente/app/domain/entities/course/chapter.entity.dart';
 import 'lesson.model.dart';
 
 class ChapterModel extends Chapter {
-  ChapterModel({
+  const ChapterModel({
     required this.id,
     required this.name,
     this.description,
